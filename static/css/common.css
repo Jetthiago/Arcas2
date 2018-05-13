@@ -1,0 +1,40 @@
+html{
+	position: relative;
+	min-height: 100%;
+}
+.footer {
+	position: relative;
+	bottom: 0;
+	width: 100%;
+	/* set the fixed height of the footer here */
+	height: 60px;
+	bottom: 0;
+	background-color: #f5f5f5;
+}
+.footer .container {
+	width: auto;
+	max-width: 680px;
+	padding: 0 15px;
+}
+.container .text-muted {
+	margin: 20px 0;
+}
+
+.error {
+	border-color: #f00;
+}
+
+/* hides the spin button */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type="number"]{
+	-moz-appearance: textfield;
+}
+
+/* hover effect on navbar-brand */
+a.navbar-brand-active{
+	color:#fff !important;
+}

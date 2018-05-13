@@ -1,0 +1,5 @@
+{
+	"ignore": ["static/*.*", "dbs/*.*"],
+	"verbose": false,
+	"ext": "hbs js"
+}

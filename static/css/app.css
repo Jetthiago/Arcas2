@@ -1,0 +1,25 @@
+.parents-container{
+    margin: 0.5em;
+	margin-right: 1em;
+}
+.pathname{
+	text-decoration: none;
+	font-size: 1.5em;
+	color: rgb(0, 0, 0);
+}
+.link-container{
+	margin-top: 0.1em;
+	margin-bottom: 0.1em;
+	margin-left: auto;
+	margin-right: auto;
+    padding: 1px;
+    border: #888;
+    border-radius: 5px;
+}
+.link-name{
+    word-wrap: break-word;
+    word-break: break-all;
+	color: #050505;
+	font-size: 1.2em;
+	text-decoration: none;
+}

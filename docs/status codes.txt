@@ -1,0 +1,4 @@
+200 - aceppted;
+403 - auth missing or wrong;
+404 - not found;
+515 - db was not able to complete the request, document not found;

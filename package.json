@@ -1,0 +1,32 @@
+{
+  "name": "arcas2",
+  "version": "0.0.0",
+  "description": "^^",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js",
+    "start": "node index.js",
+    "initial": "node util/install.js",
+    "demo": "node util/demo.js",
+    "hidden": "node util/hidden.js"
+  },
+  "author": "Thiago Marques <jetthiago@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "array-sort-by": "^1.2.1",
+    "async": "^2.5.0",
+    "colors": "^1.1.2",
+    "compressible": "^2.0.9",
+    "cookies": "^0.6.2",
+    "formidable": "^1.0.17",
+    "guidom": "^0.3.1",
+    "handlebars": "^4.0.10",
+    "mime": "^2.2.0",
+    "mocha": "^4.1.0",
+    "moloader": "^3.0.7",
+    "mongojs": "^2.4.0",
+    "nedb": "^1.8.0",
+    "object.values": "^1.0.3",
+    "probe-image-size": "^3.2.0"
+  }
+}

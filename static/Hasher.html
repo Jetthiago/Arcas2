@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style type="text/css">
+		body{font-size: 16px;}
+		.label{font-size: 200%;}
+		.password{font-size: 150%;}
+		.submit{font-size: 150%;}
+		.output{font-size: 220%;}
+		.body{text-align: center;}
+		</style>
+	</head>
+
+	<body>
+	<div class="body">
+		<label class="label">Senha a ser hashficada: </label>
+		<input id="password" class="password" type="password" size="8" />
+		<input id="submit" class="submit" type="submit" value="Hash" />
+		<p id="output" class="output">Resultado: </p>
+		<script type="text/javascript">String.prototype.hashCode = function(){var hash=0,i,chr,len;if(this.length === 0)return hash;for(i=0,len=this.length;i<len;i++){chr=this.charCodeAt(i);hash=((hash << 5) - hash) + chr;hash|=0;}return hash;};document.body.onload=function(){document.getElementById('submit').onclick = function(){var pass=document.getElementById('password').value;pass=pass.hashCode();document.getElementById('output').innerHTML="Resultado: "+pass;}}</script>
+	</div>
+	</body>
+</html>     

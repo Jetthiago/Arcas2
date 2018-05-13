@@ -1,0 +1,8 @@
+{
+    year: 2018,
+    month: 0-11,
+    revenue: [
+        {name: Maria, order: 0, day: [null, 700.00, null, 900.00], night: [null, 700.00, null, 900.00], total: 1600.00},
+        {name: Jailia, order: 1, day: [null, 700.00, null, 900.00], night: [null, 700.00, null, 900.00], total: 1600.00}
+    ]
+}
