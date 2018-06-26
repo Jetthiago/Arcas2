@@ -75,14 +75,19 @@ function routerEntries(router, hb, db, sessionne, console, config) {
         });
     });
 
-    router.postClient("/upload", (request, response, options) => {
+    router.post("/upload", (request, response, options) => {
         form = new formidable.IncomingForm();
-        form.uploadDir = __dirname + "/../uploads";
+        form.multiples = true;
+        form.uploadDir = __dirname + "/../stuff/uploads";
         form.keepExtensions = true;
-
-        form.parse(request, function (err, fields, files) {
-            JSON.stringify(files, null, 2);
-            var name = fields.title || files.upload.name;
+        form.on("file", function (field, file) {
+            fs.rename(file.path, path.join(form.uploadDir, file.name));
+        });
+        form.on("error", function (err) {
+            console.error("An error has occured: \n" + err);
+        });
+        form.on("end", function () {
+            /* var name = fields.title || files.upload.name;
             console.log("name: " + name);
             fs.rename(files.upload.path, __dirname + "/../uploads/" + name, function (err) { if (err) console.log(err) })
             var data = new createResponse(request, response, {
@@ -90,8 +95,11 @@ function routerEntries(router, hb, db, sessionne, console, config) {
                 message: "completed"
             });
             response.writeHead(data.status, data.contentType);
-            response.end(data.string);
-        });
+            response.end(data.string); */
+            response.end("success");
+        })
+
+        form.parse(request);
     });
 }
 
