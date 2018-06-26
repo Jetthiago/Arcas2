@@ -10,7 +10,7 @@ moloader.load("fs, path, url, querystring")
 // ultility variables;
 var Staticfy = staticfy;
 var Cookies = cookies;
-var console = new myConsole();
+var console = new myConsole(config.silent, config.debug);
 /*
 @ request: request from client
 @ response: response to client

@@ -9,9 +9,9 @@ Receives the auth from sessionne.checkUser and handle errors, unauthorized reque
   │ └─ but as just a request for a resource that is protected from unauthorized request;
   └─callback: if input is a object then callback is called;
 */
-
+var config = require("../config.json");
 var myConsole = require("./my_console.js"),
-	console = new myConsole();
+	console = new myConsole(config.silent, config.debug);
 
 function isAuth(err, auth, request, response, input, callback) {
 	if (typeof input == "function") callback = input;

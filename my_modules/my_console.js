@@ -1,129 +1,147 @@
 require("moloader").load("colors, util");
-
-function logWithColor(color, args, isError){
+function logWithColor(color, args, isError) {
 	var log = util.format.apply(this, args);
-	if(isError)
+	if (isError)
 		console.error(log[color]);
 	else
 		console.log(log[color]);
 }
 
-function my_console(debuging){
-	if (debuging != undefined) this.debuging = debuging;
-	else this.debuging = true;
+function my_console(silent, debuging) {
+	if (silent == undefined) {
+		this.silent = false;
+	} else {
+		this.silent = silent
+	}
+	if (silent) {
+		this.debuging = false;
+	} else if (debuging != undefined) {
+		this.debuging = debuging;
+	} else {
+		this.debuging = false;
+	}
+
 	var that = this;
-	this.server = function(){
-		arguments[0] = "[server] "+arguments[0];
+	this.server = function () {
+		if(!this.silent){
+		arguments[0] = "[server] " + arguments[0];
 		logWithColor("green", arguments);
 	}
+	}
 
-	this.db = function() {
-		arguments[0] = "[db] "+arguments[0];
+	this.db = function () {
+		arguments[0] = "[db] " + arguments[0];
 		logWithColor("gray", arguments);
 	}
 
-	this.router_server = function(){
-		arguments[0] = "[router_server] "+arguments[0];
-		logWithColor("gray", arguments);
-	}
-
-	this.staticfy = function(){
-		if(this.debuging){
-			arguments[0] = "[staticfy] "+arguments[0];
+	this.router_server = function () {
+		if (!this.silent) {
+			arguments[0] = "[router_server] " + arguments[0];
 			logWithColor("gray", arguments);
 		}
 	}
 
-	this.sessionne = function(){
-		arguments[0] = "[sessionne] "+arguments[0];
-		logWithColor("bgBlue", arguments);
+	this.staticfy = function () {
+		if (this.debuging) {
+			arguments[0] = "[staticfy] " + arguments[0];
+			logWithColor("gray", arguments);
+		}
 	}
 
-	this.log = function(){
+	this.sessionne = function () {
+		if (!this.silent) {
+			arguments[0] = "[sessionne] " + arguments[0];
+			logWithColor("bgBlue", arguments);
+		}
+	}
+
+	this.log = function () {
 		console.log.apply(this, arguments);
 	}
 
-	this.info = function(){
-		logWithColor("green", arguments);
+	this.info = function () {
+		if(!this.silent) {
+			logWithColor("green", arguments);
+		}
 	}
 
-	this.start = function(){
+	this.start = function () {
 		logWithColor("bgGreen", arguments);
 	}
 
-	this.warn = function(){
+	this.warn = function () {
 		// watch out for this one. Yellow is not working;
-		if(arguments[0]) logWithColor("bold", arguments);// observe bold instead of yellow
-		this.server = function(){
+		if (arguments[0]) logWithColor("bold", arguments);// observe bold instead of yellow
+		this.server = function () {
 			arguments[0] = "[server] Warning: " + arguments[0];
 			logWithColor("bold", arguments)
 		}
 		return this;
 	}
 
-	this.error = function(){
+	this.error = function () {
 		var error = {};
-		if(arguments[0]) logWithColor("red", arguments, true);
-		error.server = function(){
+		if (arguments[0]) logWithColor("red", arguments, true);
+		error.server = function () {
 			arguments[0] = "[server] Error: " + arguments[0];
 			logWithColor("bgRed", arguments, true);
 		};
-		error.staticfy = function(){
+		error.staticfy = function () {
 			arguments[0] = "[staticfy] Error: " + arguments[0];
 			logWithColor("magenta", arguments, true);
 		};
-		error.router_server = function(){
+		error.router_server = function () {
 			arguments[0] = "[router_server] Error: " + arguments[0];
 			logWithColor("red", arguments, true);
 		};
-		error.sessionne = function(){
+		error.sessionne = function () {
 			arguments[0] = "[sessionne] Error: " + arguments[0];
 			logWithColor("red", arguments, true);
 		};
-		error.db = function(){
+		error.db = function () {
 			arguments[0] = "[db] Error: " + arguments[0];
 			logWithColor("red", arguments, true);
 		};
 		return error;
 	}
 
-	this.noticemesenpai = function(){
+	this.noticemesenpai = function () {
 		logWithColor("random", arguments);
 	}
 
-	this.data = function(){
+	this.data = function () {
 		logWithColor("gray", arguments);
 	}
 
-	this.debug = function(){
-		if(this.debuging)
+	this.debug = function () {
+		if (this.debuging)
 			logWithColor("cyan", arguments);
 	}
 
-	this.dir = function(){
+	this.dir = function () {
 		console.dir.apply(this, arguments);
 	}
 
-	this.clear = function(){
+	this.clear = function () {
 		process.stdout.write("\u001B[2J\u001B[0;0f");
 	}
 
-	this.trace = function(){
+	this.trace = function () {
 		console.trace.apply(this, arguments);
 	}
 
-	this.assert = function(){
-		if (!assertion){
+	this.assert = function () {
+		if (!assertion) {
 			logWithColor("red", ["AssertionError: false == true"]);
 			console.assert(assertion);
 		}
 	}
 
-	this.time = function(){
+	this.time = function () {
 		console.time.apply(this, arguments);
 	}
 
-	this.timeEnd = function(){
+	this.timeEnd = function () {
 		console.timeEnd.apply(this, arguments);
 	}
 

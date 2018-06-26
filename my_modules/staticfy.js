@@ -1,6 +1,6 @@
 // Coded by Thiago Lopes <jetthiago@hotmail.com>
 require("moloader").load("fs, path, url, mime, zlib, compressible, ./../../config.json");
-var console = new myConsole(config.debug);
+var console = new myConsole(config.silent, config.debug);
 
 var staticfy = function (directory) {
 	if (!directory) directory = "./"

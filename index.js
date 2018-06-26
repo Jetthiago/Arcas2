@@ -18,14 +18,16 @@ var hb = handlebarsHb;
 var db = returnNewDb(config);
 var Sessionne = sessionne;
 sessionne = new Sessionne(db);
-var console = new myConsole(config.debug);
 
 // loading configuration;
 var port = config.port;
 var keygrip = config.keygrip;
-global["xroot"] = config.xroot
+global["silent"] = config.silent;
+global["xroot"] = config.xroot;
 global["appName"] = config.appName;
 global["codeTable"] = require("./codeTable.json");
+
+var console = new myConsole(config.silent, config.debug);
 
 // handling functions;
 function dberror(err,callback){

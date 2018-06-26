@@ -6,7 +6,7 @@ var fsdb = new nedb({filename: "dbs/runtime", autoload: true}),
 	Cookies = cookies,
 	config = require("../config.json"),
 	myConsole = require("./my_console"),
-	console = new myConsole(),
+	console = new myConsole(config.silent, config.debug),
 	keygrip = config.keygrip,
 	key = config.key;
 function sessionne(db){
