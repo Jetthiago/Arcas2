@@ -1,8 +1,8 @@
 {
-  "range": "bytes=227803136-",
-  "size": 228165073,
-  "start": 227803136,
-  "end": 228165072,
-  "chunckSize": 361937,
-  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36"
+  "range": "bytes=20545536-",
+  "size": 20617778,
+  "start": 20545536,
+  "end": 20617777,
+  "chunckSize": 72242,
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
 }

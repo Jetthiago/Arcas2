@@ -1,7 +1,7 @@
 {
   "name": "arcas2",
-  "version": "0.0.0",
-  "description": "^^",
+  "version": "0.0.1",
+  "description": "File browser with galery and player features",
   "main": "index.js",
   "scripts": {
     "test": "nodemon index.js",

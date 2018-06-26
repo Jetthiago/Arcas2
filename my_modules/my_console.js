@@ -23,10 +23,10 @@ function my_console(silent, debuging) {
 
 	var that = this;
 	this.server = function () {
-		if(!this.silent){
-		arguments[0] = "[server] " + arguments[0];
-		logWithColor("green", arguments);
-	}
+		if (!this.silent) {
+			arguments[0] = "[server] " + arguments[0];
+			logWithColor("green", arguments);
+		}
 	}
 
 	this.db = function () {
@@ -60,7 +60,7 @@ function my_console(silent, debuging) {
 	}
 
 	this.info = function () {
-		if(!this.silent) {
+		if (!this.silent) {
 			logWithColor("green", arguments);
 		}
 	}

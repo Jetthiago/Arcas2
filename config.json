@@ -1,12 +1,12 @@
 {
 	"appName": "Arcas",
 	"xroot": "/stuff",
-	"debug": true,
+	"debug": false,
 	"port": 80,
 	"key": 2163,
 	"keygrip": ["keymen12","kerman29"],
 	"databaseMode": "nedb",
 	"database": "arcas2",
 	"collections": ["login", "test"],
-	"silent": true
+	"silent": false
 }
