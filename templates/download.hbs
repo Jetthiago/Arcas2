@@ -1,29 +1,52 @@
-<div class="download">
-    <form action="#" method="get">
-        <label class="download-tile">Give a url to the server download it:</label>
+
+<div class="download container jumbotron">
+    <form class="form-horizontal" action="#" method="get">
+        <div class="from-group">
+        <h3>Give a url to the server download it:</h3>
         <br/>
-        <span>URL: </span>
-        <input type="url" name="dload" autocomplete="off" placeholder="" />
+        <span class="control-label col-sm-2">URL: </span>
+        <div class="col-sm-10">
+            <input type="url" class="form-control" name="dload" autocomplete="off" placeholder="" />
+        </div>
         <br/>
-        <span>Destination path: </span>
-        <input type="text" name="ddest" autocomplete="off" placeholder="Optional, default: /download/filename.ext" />
+        <span class="control-label col-sm-2">Destination path: </span>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="ddest" autocomplete="off" placeholder="Optional, default: /download/filename.ext" />
+        </div>
         <br/>
-        <input type="submit" style="width: auto" value="Download" />
-        <br/>
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" class="btn btn-default" style="margin-top:1em;" value="Download" />
+        </div>
+        </div>
     </form>
 </div>
 
-<div class="download">
-    <form action="#" method="get">
-        <input name="pre" type="text" autocomplete="off" placeholder="PRE" />
-        <br/>
-        <input name="start" type="number" placeholder="START" />
-        <input name="end" type="number" placeholder="END" />
-        <input name="spaces" type="number" placeholder="SPACES" />
-        <br/>
-        <input name="pos" type="text" autocomplete="off" placeholder="POS" />
-        <br/>
-        <input type="submit" style="width: auto" value="Buld link list and download" />
-        <br/>
+<div class="download container jumbotron">
+    <form class="form-vertical" action="#" method="get" autocomplete="off" >
+        <h3>Download a serie of links</h3>
+
+        <div class="input-group">
+        <div class="col-sm-12">
+            <input name="pre" type="text" class="form-control" autocomplete="radom-string" placeholder="First string" />
+        </div>
+
+        <div class="col-sm-12">
+            <input name="start" type="number" class="form-control" placeholder="Starting at" />
+            <input name="end" type="number" class="form-control" placeholder="Ending at" />
+            <input name="spaces" type="number" class="form-control" placeholder="Reserved spaces" />
+        </div>
+
+        <div class="col-sm-12">
+            <input name="pos" type="text" class="form-control" autocomplete="off" placeholder="Ending string" />
+        </div>
+
+        <input type="submit" class="btn btn-default" style="margin-top: 1em;" value="Build link list and download" />
+        </div>
+        <span class="small">Using "http://cdn.com/resources/image001.png" as example.
+            <br />- First string: "http://cdn.com/resources/image".
+            <br />- Starting at: "001". Ending at counting: "030". Reserved spaces: "3".
+            <br />- Ending string: ".png".
+            <br />Result should be a list of png files from image001 to image030.
+        </span>
     </form>
 </div>
