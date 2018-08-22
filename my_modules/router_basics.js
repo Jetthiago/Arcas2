@@ -55,11 +55,13 @@ function routerBasics(router, hb, db, sessionne, console, config) {
 			sessionne.checkUser(request, response, function (err, auth, user) {
 				isAuth(err, auth, request, response,
 					{
-						title: appName + " - " + page, html: hb[page]({}), newUrl: -1
+						title: appName + " - " + page, html: hb[page]({hidden: "hidden"}), newUrl: -1
 					});
 			});
 		}
 	}
+
+	
 
 	router.getClient("/codetable", function (request, response, options) {
 		staticfyExtended.codeTable(request, response);
@@ -216,6 +218,59 @@ function routerBasics(router, hb, db, sessionne, console, config) {
 				);
 			}
 		});
+	});
+
+	router.postClient("/download", function (request, response) {
+		sessionne.checkUser(request, response, (err, auth, user) => {
+			isAuth(err, auth, request, response, () => {
+				var form = new formidable.IncomingForm();
+				form.parse(request, function(err, fields) {
+					console.log(fields);
+					query = fields;
+					if (query.dload) {
+						download.defaultDest = path.join(__dirname, "../", config.xroot, "downloads");
+						query.dload = decodeURI(query.dload);
+						query.ddest = decodeURI(query.ddest);
+						if (query.ddest == "undefined") query.ddest = "";
+						download.get(query.dload, query.ddest, function () {
+							var results = JSON.stringify(arguments);
+							if (results == "{}") results = "success";
+							else results = "error";
+							console.log("download finished: " + results);
+							var data = new createResponse(request, response, {
+								title: appName + " - " + "download",
+								html: hb["download"]({})
+							});
+							response.writeHead(data.status, data.contentType);
+							response.write(data.string);
+							response.end();
+						});
+					}
+					else if (query.start && query.end && query.pre && query.pos && query.spaces) {
+						query.pre = decodeURI(query.pre);
+						query.pos = decodeURI(query.pos);
+						var newUrls = interator(query.pre, query.pos, query.start, query.end, query.spaces);
+						download.defaultDest = path.join(__dirname, "../", downloadDir("downloads"));
+						console.log("default dest: " + download.defaultDest);
+						async.map(newUrls, download.get, function (err, results) {
+							var results = JSON.stringify(arguments);
+							if (results == "{}") results = "success";
+							else results = "error";
+							console.log("download finished: " + results);
+							var data = new createResponse(request, response, {
+								title: appName + " - " + "download", 
+								html: hb["download"]({}), 
+								newUrl: -1
+							});
+							response.writeHead(data.status, data.contentType);
+							response.write(data.string);
+							response.end();
+						});
+					}
+				});
+			});
+		});
+		
 	});
 
 	/* router.postClient("/landing", landingPost);

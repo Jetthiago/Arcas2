@@ -4,7 +4,7 @@
 var moloader = require("moloader");
 moloader.verbose = false;
 moloader.loadPack()
-	.load("http, url, path, fs, os, dns, querystring")
+	.load("http, https, url, path, fs, os, dns, querystring")
 	.loadDir("./my_modules");
 
 // assining variables;
