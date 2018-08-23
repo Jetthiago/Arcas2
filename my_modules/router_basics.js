@@ -55,7 +55,7 @@ function routerBasics(router, hb, db, sessionne, console, config) {
 			sessionne.checkUser(request, response, function (err, auth, user) {
 				isAuth(err, auth, request, response,
 					{
-						title: appName + " - " + page, html: hb[page]({hidden: "hidden"}), newUrl: -1
+						title: appName + " - " + page, html: hb[page]({}), newUrl: -1
 					});
 			});
 		}
@@ -236,10 +236,9 @@ function routerBasics(router, hb, db, sessionne, console, config) {
 							var results = JSON.stringify(arguments);
 							if (results == "{}") results = "success";
 							else results = "error";
-							console.log("download finished: " + results);
 							var data = new createResponse(request, response, {
 								title: appName + " - " + "download",
-								html: hb["download"]({})
+								html: hb["download"]({simpleSuccess: true})
 							});
 							response.writeHead(data.status, data.contentType);
 							response.write(data.string);
@@ -250,17 +249,15 @@ function routerBasics(router, hb, db, sessionne, console, config) {
 						query.pre = decodeURI(query.pre);
 						query.pos = decodeURI(query.pos);
 						var newUrls = interator(query.pre, query.pos, query.start, query.end, query.spaces);
-						download.defaultDest = path.join(__dirname, "../", downloadDir("downloads"));
-						console.log("default dest: " + download.defaultDest);
+						download.defaultDest = path.join(__dirname, "../", config.xroot, "downloads");
 						async.map(newUrls, download.get, function (err, results) {
 							var results = JSON.stringify(arguments);
-							if (results == "{}") results = "success";
+							if (results[0] == null) results = "success";
 							else results = "error";
 							console.log("download finished: " + results);
 							var data = new createResponse(request, response, {
 								title: appName + " - " + "download", 
-								html: hb["download"]({}), 
-								newUrl: -1
+								html: hb["download"]({ serieSuccess: true })
 							});
 							response.writeHead(data.status, data.contentType);
 							response.write(data.string);

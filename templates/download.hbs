@@ -11,11 +11,13 @@
         <br/>
         <span class="control-label col-sm-2">Destination path: </span>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="ddest" autocomplete="off" placeholder="Optional, default: /download/filename.ext" />
+            <input type="text" class="form-control" name="ddest" autocomplete="off" placeholder="Optional, default: /downloads/filename.ext" />
         </div>
-        <div class="col-sm-offset-2 col-sm-10 alert alert-info {{hidden}}" id="alert-pass">
+        {{#if simpleSuccess}}
+        <div class="col-sm-offset-2 col-sm-10 alert alert-success" id="alert-pass">
             <strong>Download successful</strong>
         </div>
+        {{/if}}
         <div class="col-sm-offset-2 col-sm-10">
             <button onclick="router_client.submiter.postNoValidation(event)" class="btn btn-default" style="margin-top: 1em;">
                 Download
@@ -43,6 +45,12 @@
         <div class="col-sm-12">
             <input name="pos" type="text" class="form-control" autocomplete="off" placeholder="Ending string" />
         </div>
+
+        {{#if serieSuccess}}
+        <div class="col-sm-12 alert alert-success" id="alert-pass">
+            <strong>Download successful</strong>
+        </div>
+        {{/if}}
 
         <button onclick="router_client.submiter.postNoValidation(event)" class="btn btn-default" style="margin-top: 1em;">
             Build link list and download

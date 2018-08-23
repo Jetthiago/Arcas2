@@ -3,7 +3,7 @@ var fs = require("fs");
 var path = require("path");
 var async = require("async");
 */
-var downloadDir = function(myPath){
+var genDirectories = function(myPath){
     var stats, result = 0, newPath;
     for(var i = 0; true; i++){
         newPath = path.join(myPath, i.toString());
@@ -23,4 +23,4 @@ var downloadDir = function(myPath){
     return newPath;
 }
 
-module.exports = downloadDir;
+module.exports = genDirectories;

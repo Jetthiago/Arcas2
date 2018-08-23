@@ -2,7 +2,6 @@
 	http = require("http"),
 	fs = require("fs")*/
 
-var config = require("../config.json");
 var regSSL = /https/;
 
 function save(response,file,callback){
