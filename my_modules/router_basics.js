@@ -220,6 +220,47 @@ function routerBasics(router, hb, db, sessionne, console, config) {
 		});
 	});
 
+	router.postClient("/app", function (request, response) {
+		sessionne.checkUser(request, response, (err, auth, user) => {
+			isAuth(err, auth, request, response, () => {
+				var form = new formidable.IncomingForm();
+				form.parse(request, function (err, fields) {
+					if(fields.path){
+						var requestedPath = path.join(__dirname, "../", config.xroot, fields.path),
+							requestedDir = fs.readdirSync(requestedPath);
+
+						var archive = archiver("zip", {zlib: {level: 9}});
+						response.on("close", function () {
+							console.log(archive.pointer() + " total bytes");
+						});
+						response.on("end", function () {
+							console.log("Data drained");
+						});
+						response.setHeader("Content-Disposition", 'attachment; filename="'+fields.path+'"')
+						archive.pipe(response);
+						for(var i = 0; i < requestedDir.length; i++){
+							var dirItem = requestedDir[i],
+								dirItemPath = path.join(requestedPath, dirItem),
+								dirItemStat = fs.statSync(dirItemPath);
+							if(dirItemStat.isFile()){
+								// only files are handled;
+								archive.append(fs.createReadStream(dirItemPath), {name: dirItem});
+							}
+						}
+						archive.finalize();
+					} else {
+						// can't download everything with one request;
+						var data = new createResponse(request, response, {
+							newUrl: "app"
+						});
+						response.writeHead(data.status, data.contentType);
+						response.end(data.string);
+					}
+				});
+			});
+		});
+	});
+
 	router.postClient("/download", function (request, response) {
 		function useGivenName(name) {
 			var newDirectory = "",

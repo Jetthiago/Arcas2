@@ -182,6 +182,17 @@ var router_client = {
 		}
 		return false
 	},
+	getSubquery: function (name) {
+		var query = window.location.hash.split("?")[1];
+		var vars = query.split("&");
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split("=");
+			if (decodeURIComponent(pair[0]) == name) {
+				return decodeURIComponent(pair[1]);
+			}
+		}
+		return false
+	},
 	setQuery: function(input, value){
 		if(!value){
 			var key = Object.keys(input)[0],
@@ -217,10 +228,52 @@ var router_client = {
 		postNoValidation: function (event) {
 			event.preventDefault();
 			var form = $("#body").find("form");
+			console.log(form.serialize());
 			router_client.createRequest({
 				isPost: true,
 				post: form.serialize()
 			});
+		},
+		getDirectory: function (event) {
+			/* var usableHash = router_client.getSubquery("path"),
+				form = $.param({path: usableHash});
+			router_client.createRequest({
+				isPost: true,
+				post: form
+			}); */
+
+			var usableHash = router_client.getSubquery("path"),
+				form = $.param({ path: usableHash });
+			var request = new XMLHttpRequest();
+			request.open("POST", "/app?router_req=true", true);
+			request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+			request.responseType = 'blob';
+
+			request.onload = function () {
+				// Only handle status code 200
+				if (request.status === 200) {
+					// Try to find out the filename from the content disposition `filename` value
+					var disposition = request.getResponseHeader('content-disposition');
+					var matches = /"([^"]*)"/.exec(disposition);
+					var filename = (matches != null && matches[1] ? matches[1] : 'file.zip');
+
+					// The actual download
+					var blob = new Blob([request.response], { type: 'application/zip' });
+					var link = document.createElement('a');
+					link.href = window.URL.createObjectURL(blob);
+					link.download = filename;
+
+					document.body.appendChild(link);
+
+					link.click();
+
+					document.body.removeChild(link);
+				}
+
+				// some error handling should be done here...
+			};
+
+			request.send(form);
 		}
 	},
 	event: {
