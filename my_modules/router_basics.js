@@ -221,11 +221,36 @@ function routerBasics(router, hb, db, sessionne, console, config) {
 	});
 
 	router.postClient("/download", function (request, response) {
+		function useGivenName(name) {
+			var newDirectory = "",
+				downloadsDirectoryPath = path.join(__dirname, "../", config.xroot, "downloads");
+
+			if (name) {
+				var exists,
+					newPath = path.join(downloadsDirectoryPath, name);
+				try {
+					var stats = fs.statSync(newPath);
+					if (!stats.isDirectory()) {
+						exists = false;
+					} else {
+						exists = true;
+					}
+				} catch (err) {
+					exists = false;
+				}
+				if (!exists) {
+					fs.mkdirSync(newPath);
+				}
+				newDirectory = newPath;
+			} else {
+				newDirectory = genDirectories(downloadsDirectoryPath);
+			}
+			return newDirectory;
+		}
 		sessionne.checkUser(request, response, (err, auth, user) => {
 			isAuth(err, auth, request, response, () => {
 				var form = new formidable.IncomingForm();
 				form.parse(request, function(err, fields) {
-					console.log(fields);
 					query = fields;
 					if (query.dload) {
 						download.defaultDest = path.join(__dirname, "../", config.xroot, "downloads");
@@ -233,7 +258,6 @@ function routerBasics(router, hb, db, sessionne, console, config) {
 						query.ddest = decodeURI(query.ddest);
 						if (query.ddest == "undefined") query.ddest = "";
 						download.get(query.dload, query.ddest, function () {
-							var results = JSON.stringify(arguments);
 							if (results == "{}") results = "success";
 							else results = "error";
 							var data = new createResponse(request, response, {
@@ -249,15 +273,32 @@ function routerBasics(router, hb, db, sessionne, console, config) {
 						query.pre = decodeURI(query.pre);
 						query.pos = decodeURI(query.pos);
 						var newUrls = interator(query.pre, query.pos, query.start, query.end, query.spaces);
-						download.defaultDest = path.join(__dirname, "../", config.xroot, "downloads");
+
+						download.defaultDest = useGivenName(query.serieName);
 						async.map(newUrls, download.get, function (err, results) {
-							var results = JSON.stringify(arguments);
 							if (results[0] == null) results = "success";
 							else results = "error";
-							console.log("download finished: " + results);
 							var data = new createResponse(request, response, {
 								title: appName + " - " + "download", 
 								html: hb["download"]({ serieSuccess: true })
+							});
+							response.writeHead(data.status, data.contentType);
+							response.write(data.string);
+							response.end();
+						});
+					}
+					else if (query.batchUrls){
+						query.batchUrls = decodeURI(query.batchUrls);
+						var batch = query.batchUrls.split(/\r?\n|\r/);
+						batch.clean("");
+
+						download.defaultDest = useGivenName(query.batchName);
+						async.map(batch, download.get, function (err, results) {
+							if (results[0] == null) results = "success";
+							else results = "error";
+							var data = new createResponse(request, response, {
+								title: appName + " - " + "download",
+								html: hb["download"]({ batchSuccess: true })
 							});
 							response.writeHead(data.status, data.contentType);
 							response.write(data.string);
@@ -394,5 +435,15 @@ function clearUpName(str) {
 	str = tempArr.join(" ");
 	return str;
 }
+
+Array.prototype.clean = function (deleteValue) {
+	for (var i = 0; i < this.length; i++) {
+		if (this[i] == deleteValue) {
+			this.splice(i, 1);
+			i--;
+		}
+	}
+	return this;
+};
 
 module.exports = routerBasics;

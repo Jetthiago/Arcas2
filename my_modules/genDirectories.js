@@ -1,13 +1,13 @@
 /* 
-var fs = require("fs");
-var path = require("path");
-var async = require("async");
+This module creates a new directory following the 
+order of other existing directories. 
+It is used when a user makes a request to download several
+files whilst not giving a name to the new directory.
 */
 var genDirectories = function(myPath){
     var stats, result = 0, newPath;
     for(var i = 0; true; i++){
         newPath = path.join(myPath, i.toString());
-        console.log("new path:" + newPath);
         try{
             stats = fs.statSync(newPath);
             if(!stats.isDirectory()){

@@ -1,7 +1,8 @@
 - add loading anim on main teplate instead of null;
-x add download and upload features; // http://blueimp.github.io/jQuery-File-Upload/
+v add download and upload features; // http://blueimp.github.io/jQuery-File-Upload/
 - handle static html and other types on app;
 - add 'message' field on response;
 - add codetable function using message;
 - H A N D L E  E R R O R S ;
 - http://127.0.1.1/..%5C..%5Cindex.js?from_root=true feelsbadman.png
+- make possible to download a whole dir in a zip file: https://www.npmjs.com/package/archiver ;

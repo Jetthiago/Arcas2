@@ -1,8 +1,68 @@
 
+<link rel="stylesheet" type="text/css" href="css/download.css" />
+<div class="download container jumbotron">
+    <form class="form-vertical" action="#" method="get" autocomplete="off">
+        <h3>Download a serie of links</h3>
+
+        <div class="input-group">
+            <div class="col-sm-12">
+                <input name="pre" type="text" class="form-control" autocomplete="radom-string" placeholder="First string" />
+            </div>
+
+            <div class="col-sm-12">
+                <input name="start" type="number" class="form-control" placeholder="Starting at" />
+                <input name="end" type="number" class="form-control" placeholder="Ending at" />
+                <input name="spaces" type="number" class="form-control" placeholder="Reserved spaces" />
+            </div>
+
+            <div class="col-sm-12">
+                <input name="pos" type="text" class="form-control" autocomplete="off" placeholder="Ending string" />
+                <input name="serieName" type="text" class="form-control" autocomplete="off" placeholder="Name of new directory (optional)" />
+            </div>
+
+            {{#if serieSuccess}}
+            <div class="col-sm-12 alert alert-success" id="alert-pass">
+                <strong>Download successful</strong>
+            </div>
+            {{/if}}
+
+            <button onclick="router_client.submiter.postNoValidation(event)" class="btn btn-default" style="margin-top: 1em;">
+                Build link list and download
+            </button>
+        </div>
+        <span class="small">Using "http://cdn.com/resources/image001.png" as example.
+            <br />- First string: "http://cdn.com/resources/image".
+            <br />- Starting at: "001". Ending at counting: "030". Reserved spaces: "3".
+            <br />- Ending string: ".png".
+            <br />Result should be a list of png files from image001 to image030.
+        </span>
+    </form>
+</div>
+
+<div class="download container jumbotron">
+    <form class="form-vertical" action="#" method="get" autocomplete="off">
+        <h3>Download a batch of files</h3>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <textarea rows="7" class="form-control" name="batchUrls" placeholder=""></textarea>
+                <input name="batchName" type="text" class="form-control" autocomplete="off" placeholder="Name of new directory (optional)" />
+            </div>
+            {{#if batchSuccess}}
+            <div class="col-sm-12 alert alert-success" id="alert-pass">
+                <strong>Download successful</strong>
+            </div>
+            {{/if}}
+            <button onclick="router_client.submiter.postNoValidation(event)" class="btn btn-default" style="margin-top: 1em;">
+                Download list
+            </button>
+        </div>
+    </form>
+</div>
+
 <div class="download container jumbotron">
     <form class="form-horizontal" action="#" method="get">
         <div class="from-group">
-        <h3>Give a url to the server download it:</h3>
+        <h3>Give the server a URL to download:</h3>
         <br/>
         <span class="control-label col-sm-2">URL: </span>
         <div class="col-sm-10">
@@ -27,40 +87,4 @@
     </form>
 </div>
 
-<div class="download container jumbotron">
-    <form class="form-vertical" action="#" method="get" autocomplete="off" >
-        <h3>Download a serie of links</h3>
 
-        <div class="input-group">
-        <div class="col-sm-12">
-            <input name="pre" type="text" class="form-control" autocomplete="radom-string" placeholder="First string" />
-        </div>
-
-        <div class="col-sm-12">
-            <input name="start" type="number" class="form-control" placeholder="Starting at" />
-            <input name="end" type="number" class="form-control" placeholder="Ending at" />
-            <input name="spaces" type="number" class="form-control" placeholder="Reserved spaces" />
-        </div>
-
-        <div class="col-sm-12">
-            <input name="pos" type="text" class="form-control" autocomplete="off" placeholder="Ending string" />
-        </div>
-
-        {{#if serieSuccess}}
-        <div class="col-sm-12 alert alert-success" id="alert-pass">
-            <strong>Download successful</strong>
-        </div>
-        {{/if}}
-
-        <button onclick="router_client.submiter.postNoValidation(event)" class="btn btn-default" style="margin-top: 1em;">
-            Build link list and download
-        </button>
-        </div>
-        <span class="small">Using "http://cdn.com/resources/image001.png" as example.
-            <br />- First string: "http://cdn.com/resources/image".
-            <br />- Starting at: "001". Ending at counting: "030". Reserved spaces: "3".
-            <br />- Ending string: ".png".
-            <br />Result should be a list of png files from image001 to image030.
-        </span>
-    </form>
-</div>
