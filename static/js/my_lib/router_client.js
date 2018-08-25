@@ -71,8 +71,11 @@ var router_client = {
 	handleResponse: function(response,callback){
 		if(typeof response == "string") response = JSON.parse(response);
 		//console.debug(response);
-		// smartify this status line, most likely with a callback;
-		if(response.status == 403) router_client.hashHandler("/login");
+		if(response.status == 403) {
+			message.warning("Redirected to login page");
+			hasher.setHash("login");
+			//router_client.hashHandler("/login");
+		}
 		if(response.html) document.getElementById('body').innerHTML = response.html;
 		if(response.title) document.title = response.title;
 		if(response.auth){
@@ -80,6 +83,7 @@ var router_client = {
 				router_client.auth = null;
 				router_client.auth = new doAuth(response);
 				router_client.changeLoginState(true);
+				$(".alert-warning").alert("close");
 			}
 		} else {
 			router_client.auth = {get: function(){return {auth: 0, user: ""}}}
@@ -95,10 +99,14 @@ var router_client = {
 			}
 		}
 		if(response.message){
-			// simple message, fades away
+			if(response.messageContext){
+				message[response.messageContext](response.message)
+			} else {
+				message.primary(response.message);
+			}
 		}
 		if(response.error){
-			// error message, promp with button
+			message.error("Server response: " + response.error + " | Status: "+ response.status + " | Detail: " + response.message);
 		}
 		if(callback) callback(response);
 		setTimeout(function () {

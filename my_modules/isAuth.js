@@ -5,8 +5,8 @@ Receives the auth from sessionne.checkUser and handle errors, unauthorized reque
   ├─err: if null, the code continues, else serverError is called;
   ├─auth: number from sessionne;
   ├─input: can be a object for ¨createResponse¨ or a callback;
-  │ ├─input as object is a convenience for callbacks that just need to respond with no handling
-  │ └─ but as just a request for a resource that is protected from unauthorized request;
+  │ ├─input as object is a convenient for callbacks that just need to respond with no handling
+  │ └─ but being a request for a resource that is protected from unauthorized request;
   └─callback: if input is a object then callback is called;
 */
 var config = require("../config.json");
@@ -19,12 +19,18 @@ function isAuth(err, auth, request, response, input, callback) {
 		var data = new createResponse(request, response, {
 			error: err,
 			status: 500,
-			html: "Auth error"
+			message: "Auth error"
 		});
 		serverError(data, request, response);
 	} else if (typeof input == "function" && (auth == 0 || auth == -1)) {
 		var data = new createResponse(request, response, {
-			newUrl: "login",
+			status: 403
+		});
+		console.server("user denied, sending it to login page");
+		response.writeHead(data.status, data.contentType);
+		response.end(data.string);
+	} else if (typeof input == "object" && (auth == 0 || auth == -1) && input.newUrl == -1) {
+		var data = new createResponse(request, response, {
 			status: 403
 		});
 		console.server("user denied, sending it to login page");

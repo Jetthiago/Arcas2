@@ -38,3 +38,9 @@ input[type="number"]{
 a.navbar-brand-active{
 	color:#fff !important;
 }
+
+.alert{
+	margin-bottom: 5px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+}

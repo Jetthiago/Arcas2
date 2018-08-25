@@ -6,6 +6,7 @@ var responseModel = {
 	user: String,
 	contentType: Object,
 	status: Number,
+	messageContext: String,
 	message: String,
 	error: String
 }
