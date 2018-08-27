@@ -1,9 +1,10 @@
-- add loading anim on main teplate instead of null;
+- add dark theme;
 - handle static html and other types on app;
 - add codetable function using message;
 - H A N D L E  E R R O R S ;
-- add strings file to facilitate translation or reuse in another project;
 - http://127.0.1.1/..%5C..%5Cindex.js?from_root=true feelsbadman.png;
+v add loading animation on main teplate instead of null;
 v add 'message' field on response;
-v add download and upload features; // http://blueimp.github.io/jQuery-File-Upload/
-v make possible to download a whole dir in a zip file: https://www.npmjs.com/package/archiver ;
+v add download and upload features;
+v add feature to download a whole dir in a zip file; https://www.npmjs.com/package/archiver ;
+x add strings file to facilitate translation or reuse in another project (forget it); 

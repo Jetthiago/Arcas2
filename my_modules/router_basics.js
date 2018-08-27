@@ -30,7 +30,7 @@ function routerBasics(router, hb, db, sessionne, console, config) {
 			}
 			if(auth == 0 || auth == -1){
 				response.writeHead(200, { "Content-Type": "text/html" });
-				response.end(hb.main({ body: "null", appName: appName, title: appName }));
+				response.end(hb.main({ body: hb.loading(), appName: appName, title: appName }));
 			} else {
 				genHb.app(request, (err, hbData) => {
 					response.writeHead(200, { "Content-Type": "text/html" });
