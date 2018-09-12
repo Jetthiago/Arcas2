@@ -1,4 +1,8 @@
+- add thumbnails;
+- make the app run as a windows service;
+- add file logging;
 - add dark theme;
+- add a second zoom gesture on image page like chrome;
 - handle static html and other types on app;
 - add codetable function using message;
 - H A N D L E  E R R O R S ;

@@ -1,4 +1,6 @@
+
 require("moloader").load("colors, util");
+
 function logWithColor(color, args, isError) {
 	var log = util.format.apply(this, args);
 	if (isError)

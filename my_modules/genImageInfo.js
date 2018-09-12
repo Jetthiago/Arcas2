@@ -62,9 +62,8 @@ module.exports = function genImageInfo(pathname, callback) {
                     src: encodeURIComponent(path.join(midRoot, dir[i])) + "?from_root=true",
                     w: results[i].width,
                     h: results[i].height,
-                    title: dir[i]/*,
-						// compressed url
-						msrc: dir[i]+"?comp=true"*/
+                    title: dir[i],
+                    msrc: encodeURIComponent(path.join(midRoot, "thumbnails", dir[i])) + "?from_root=true"
                 };
             }
             /* 

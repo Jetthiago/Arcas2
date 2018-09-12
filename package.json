@@ -1,6 +1,6 @@
 {
   "name": "arcas2",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "File browser with galery and player features",
   "main": "index.js",
   "scripts": {
@@ -27,8 +27,10 @@
     "moloader": "^3.0.7",
     "mongojs": "^2.4.0",
     "nedb": "^1.8.0",
+    "node-thumbnail": "^0.14.0",
     "object.values": "^1.0.3",
-    "probe-image-size": "^3.2.0"
+    "probe-image-size": "^3.2.0",
+    "time-stamp": "^2.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.3"
