@@ -194,12 +194,13 @@ var driveBackup = {
         });
     }
 }
-
+// uncomment here to enable the cloud backup
+/* 
 driveBackup.init((auth) => {
     driveBackup.service(auth);
     scheduleBackup(auth);
 });
-
+ */
 function scheduleBackup(auth) {
     var date = new Date();
     var nextChange = new Date();
