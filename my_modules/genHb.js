@@ -92,10 +92,11 @@ module.exports = {
                             hbData.dirs.push(holder);
                         } else if (classe == "file") {
                             if (regImage.test(mime.getType(filename))) {
-                                thumbnails(public.dirpath, filename);
-                                // show the image hbs;
-                                holder.path = "/image?path=" + joined + "&sg=true";
-                                holder.image = true;
+                                thumbnails(public.dirpath, filename, function () {
+                                    // show the image hbs;
+                                    holder.path = "/image?path=" + joined + "&sg=true";
+                                    holder.image = true;
+                                });
                             } else if(regVideo.test(mime.getType(filename))) {
                                 // show the video "hbs";
                                 holder.path = "/video?path=" +  joined;

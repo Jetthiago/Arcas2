@@ -7,9 +7,10 @@
 	"databaseMode": "nedb",
 	"database": "arcas2",
 	"collections": ["login", "test"],
-	"thumbwidth": 250,
+	"thumbwidth": 100,
 	"debug": false,
 	"silent": false,
 	"logfile": true,
-	"asService": false
+	"asService": false,
+	"fsLogger": true
 }

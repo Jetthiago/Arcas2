@@ -1,4 +1,4 @@
-- add thumbnails;
+- add thumbnails on app page;
 - make the app run as a windows service;
 - add file logging;
 - add dark theme;
@@ -12,3 +12,12 @@ v add 'message' field on response;
 v add download and upload features;
 v add feature to download a whole dir in a zip file; https://www.npmjs.com/package/archiver ;
 x add strings file to facilitate translation or reuse in another project (forget it); 
+
+driveBackup
+https://www.npmjs.com/package/google-drive#resources
+https://developers.google.com/drive/api/v2/reference/files/update
+https://stackoverflow.com/questions/38539158/how-to-update-already-existing-file-in-google-drive-api-v3-java
+google drive api overwrite file^
+https://console.developers.google.com/apis/dashboard?project=arcas2-1537991313640&duration=PT1H
+https://drive.google.com/drive/folders/1qBtjsXCvy-JAVuPLjCTXXcmurTWxIK50
+https://developers.google.com/drive/api/v3/folder

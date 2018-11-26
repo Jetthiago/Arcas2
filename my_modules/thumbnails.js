@@ -1,7 +1,8 @@
 
 var thumb = nodeThumbnail.thumb;
 
-var thumbnails = function (dir, filepath) {
+var thumbnails = function (dir, filepath, callback) {
+    callback();
     filepath = path.join(dir ,filepath);
     //console.log("filer":filepath);
     var thumbPath = path.join(dir, "thumbnails");
@@ -15,12 +16,11 @@ var thumbnails = function (dir, filepath) {
         ignore: true,
         quiet: true,
         suffix: "",
-        concurrency: 4
+        concurrency: 6 // number of cores;
     }, function (files, err) {
         if (err) return console.error(err);
         console.log(files);
     });
-
 }
 
 

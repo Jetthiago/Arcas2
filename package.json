@@ -20,6 +20,8 @@
     "compressible": "^2.0.9",
     "cookies": "^0.6.2",
     "formidable": "^1.0.17",
+    "google-drive": "0.0.8",
+    "googleapis": "^27.0.0",
     "guidom": "^0.3.1",
     "handlebars": "^4.0.10",
     "mime": "^2.2.0",
