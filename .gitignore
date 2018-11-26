@@ -66,3 +66,5 @@ stuff/
 
 # vscode
 .vscode/
+token.json
+credentials.json
