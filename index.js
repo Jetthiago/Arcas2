@@ -7,6 +7,8 @@ moloader.loadPack()
 	.load("http, https, url, path, fs, os, dns, querystring")
 	.loadDir("./my_modules");
 
+// starting log stream
+fsLogger.createStream();
 // assining variables;
 var config = require("./config.json");
 var Staticfy = staticfy;

@@ -86,15 +86,17 @@ module.exports = {
                         // creates a object for every dir item with a path for it and a name to show;
                         holder.name = filename;
                         var joined = encodeURIComponent(path.join(public.pathname, filename));
-                        if (classe == "directory") {
+                        if (classe == "directory" && holder.name != "thumbnails") { // thumbnails exception;
                             // open a new directory;
                             holder.path = "#/app?path=" + joined;
                             hbData.dirs.push(holder);
                         } else if (classe == "file") {
                             if (regImage.test(mime.getType(filename))) {
-                                // show the image hbs;
-                                holder.path = "/image?path=" + joined + "&sg=true";
-                                holder.image = true;
+                                thumbnails(public.dirpath, filename, function () {
+                                    // show the image hbs;
+                                    holder.path = "/image?path=" + joined + "&sg=true";
+                                    holder.image = true;
+                                });
                             } else if(regVideo.test(mime.getType(filename))) {
                                 // show the video "hbs";
                                 holder.path = "/video?path=" +  joined;
