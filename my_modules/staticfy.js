@@ -29,8 +29,18 @@ staticfy.prototype.serve = function (request, response, options) {
 
 	fs.readFile(namefile, function (err, file) {
 		if (err) {
-			console.error().staticfy("request failed, cant find: " + namefile);
-			response.writeHead(404);
+			if(String(parsedUrl.pathname).search("php") != -1){
+				response.writeHead(200);
+				response.write("Imagine writing php in 2019!!!\nLMAO LOOK AT THIS DUDE PEPELAUGH");
+				console.log("PHP request:" + namefile +"|ip: "+request.connection.remoteAddress + "|proxy:"+request.headers['x-forwarded-for']);
+			} else if(decodeURIComponent(parsedUrl.pathname) == "/robots.txt"){
+				response.writeHead(200);
+				response.write("User-agent: *\nDisallow: /\n\nUser-agent: AdsBot-Google\nDisallow: /");
+				console.log("ROBOTS request:" + namefile +"|ip: "+request.connection.remoteAddress + "|proxy:"+request.headers['x-forwarded-for']);
+			} else {
+				console.error().staticfy("request failed, cant find: " + namefile);
+				response.writeHead(404);
+			}
 			return response.end();
 		}
 		var options = { level: 8 }

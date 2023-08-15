@@ -9,8 +9,7 @@
 	"collections": ["login", "test"],
 	"thumbwidth": 100,
 	"debug": false,
-	"silent": false,
+	"silent": true,
 	"logfile": true,
-	"asService": false,
-	"fsLogger": true
+	"asService": false
 }

@@ -66,17 +66,19 @@ module.exports = function genImageInfo(pathname, callback) {
                     msrc: encodeURIComponent(path.join(midRoot, "thumbnails", dir[i])) + "?from_root=true"
                 };
             }
-            /* 
-            // old sorting
+            //var collator = new Intl.Collator(undefined, {numeric: true, sensitivity: "base"});
             function compareSon(item) {
                 return function (a, b) {
                     a = a[item]; b = b[item];
-                    return a.localeCompare(b);
+                    return String(a).localeCompare(b, undefined, {numeric: true, sensitivity: "accent"});
                 }
             }
             data.items.sort(compareSon("src")); 
-            */
-            data.items = arraySortBy(data.items, item => item.src);
+            
+            
+            /* 
+            // old sorting
+            data.items = arraySortBy(data.items, item => item.src); */
             data.actual.name = filename;
             data.actual.index = dir.indexOf(filename);
             callback(null, data);
