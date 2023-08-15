@@ -16,7 +16,7 @@ var thumbnails = function (dir, filepath, callback) {
         ignore: true,
         quiet: true,
         suffix: "",
-        concurrency: 6 // number of cores;
+        concurrency: 6
     }, function (files, err) {
         if (err) return console.error(err);
         console.log(files);

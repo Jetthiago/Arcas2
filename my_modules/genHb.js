@@ -92,11 +92,11 @@ module.exports = {
                             hbData.dirs.push(holder);
                         } else if (classe == "file") {
                             if (regImage.test(mime.getType(filename))) {
-                                thumbnails(public.dirpath, filename, function () {
+                                //thumbnails(public.dirpath, filename, function () {
                                     // show the image hbs;
                                     holder.path = "/image?path=" + joined + "&sg=true";
                                     holder.image = true;
-                                });
+                                //});
                             } else if(regVideo.test(mime.getType(filename))) {
                                 // show the video "hbs";
                                 holder.path = "/video?path=" +  joined;
@@ -122,12 +122,20 @@ module.exports = {
                             return a.localeCompare(b);
                         }
                     }
+                    */
                     // alphabetically sorts the arrays containg the info about the dir;
+                    function compareSon(item) {
+                        return function (a, b) {
+                            a = a[item]; b = b[item];
+                            return String(a).localeCompare(b, undefined, {numeric: true, sensitivity: "base"});
+                        }
+                    }
                     hbData.dirs.sort(compareSon("name"));
                     hbData.files.sort(compareSon("name"));
-                    */
-                    hbData.dirs = arraySortBy(hbData.dirs, item => item.name);
-                    hbData.files = arraySortBy(hbData.files, item => item.name);
+                    
+
+                    /* hbData.dirs = arraySortBy(hbData.dirs, item => item.name);
+                    hbData.files = arraySortBy(hbData.files, item => item.name); */
                     for (var i = 0; i < hbData.files.length; i++) {
                         if (hbData.files[i].image){
                             hbData.files[i].path += "&in=" + i;

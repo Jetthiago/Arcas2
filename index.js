@@ -4,11 +4,9 @@
 var moloader = require("moloader");
 moloader.verbose = false;
 moloader.loadPack()
-	.load("http, https, url, path, fs, os, dns, querystring")
+	.load("http, url, path, fs, os, dns, querystring")
 	.loadDir("./my_modules");
 
-// starting log stream
-fsLogger.createStream();
 // assining variables;
 var config = require("./config.json");
 var Staticfy = staticfy;
@@ -51,9 +49,9 @@ var server = http.createServer(function(request, response){
 	router.end();
 });
 
-dns.lookup(os.hostname(), {all:true, family: 4}, function(err, add, fam){
-	server.listen(port,function(){console.start("Single-Page-Vanilla serving locally at http://"+add[add.length - 1].address+":"+port+"/")});
-});
+//dns.lookup(os.hostname(), {all:true, family: 4}, function(err, add, fam){
+	server.listen(port,function(){console.start("Single-Page-Vanilla serving locally")});
+//});
 
 /*var exceptionOccured = false;
 process.on('uncaughtException', function(err) {

@@ -1,23 +1,8 @@
-- add thumbnails on app page;
-- make the app run as a windows service;
-- add file logging;
-- add dark theme;
-- add a second zoom gesture on image page like chrome;
+- add loading anim on main teplate instead of null;
 - handle static html and other types on app;
+- add 'message' field on response;
 - add codetable function using message;
 - H A N D L E  E R R O R S ;
-- http://127.0.1.1/..%5C..%5Cindex.js?from_root=true feelsbadman.png;
-v add loading animation on main teplate instead of null;
-v add 'message' field on response;
-v add download and upload features;
-v add feature to download a whole dir in a zip file; https://www.npmjs.com/package/archiver ;
-x add strings file to facilitate translation or reuse in another project (forget it); 
-
-driveBackup
-https://www.npmjs.com/package/google-drive#resources
-https://developers.google.com/drive/api/v2/reference/files/update
-https://stackoverflow.com/questions/38539158/how-to-update-already-existing-file-in-google-drive-api-v3-java
-google drive api overwrite file^
-https://console.developers.google.com/apis/dashboard?project=arcas2-1537991313640&duration=PT1H
-https://drive.google.com/drive/folders/1qBtjsXCvy-JAVuPLjCTXXcmurTWxIK50
-https://developers.google.com/drive/api/v3/folder
+- http://127.0.1.1/..%5C..%5Cindex.js?from_root=true feelsbadman.png
+v add download and upload features; // http://blueimp.github.io/jQuery-File-Upload/
+v make possible to download a whole dir in a zip file: https://www.npmjs.com/package/archiver ;
